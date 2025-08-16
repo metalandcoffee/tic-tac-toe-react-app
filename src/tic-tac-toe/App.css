@@ -1,0 +1,6 @@
+/* App-specific styles can go here */
+.board-row:after {
+  clear: both;
+  content: '';
+  display: table;
+}

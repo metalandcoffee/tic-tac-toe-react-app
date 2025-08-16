@@ -1,11 +1,5 @@
 /* Global styles for the tic-tac-toe game */
 
-.board-row:after {
-  clear: both;
-  content: '';
-  display: table;
-}
-
 .status {
   margin-bottom: 10px;
 }
