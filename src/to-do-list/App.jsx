@@ -1,13 +1,14 @@
 import { useState } from 'react';
 
-const DEFAULT_TASK = [
-  'Walk the dog',
-  'Water the plants',
-  'Wash the dishes',
-];
+// const DEFAULT_TASK = [
+//   'Walk the dog',
+//   'Water the plants',
+//   'Wash the dishes',
+// ];
+const localStorageTasks = localStorage.getItem('tasks') || [];
 
 export default function App() {
-  const [tasks, setTasks] = useState(DEFAULT_TASK);
+  const [tasks, setTasks] = useState(JSON.parse(localStorageTasks));
   const [newTask, setNewTask] = useState('');
 
   const list = tasks.map(( task, id ) => {
@@ -18,12 +19,16 @@ export default function App() {
   });
 
   const handleAdd = () => {
-    setTasks([...tasks, newTask]);
+    if (!newTask) return;
+    const nextTasks = [...tasks, newTask];
+    setTasks(nextTasks);
+    localStorage.setItem('tasks', JSON.stringify(nextTasks));
     setNewTask('');
   }
 
   const handleDelete = ( removeId ) => {
     const nextTasks = tasks.filter((task, id) => id !== removeId );
+    localStorage.setItem('tasks', JSON.stringify(nextTasks));
     setTasks(nextTasks);
   }
 
